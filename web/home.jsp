@@ -201,8 +201,8 @@
         
           
           <select class="form-control" name="tipo_pasta_id">
-                <option value="1">Opción 1</option>
-                <option value="2">Opción 2</option>
+                <option value="1">Duro</option>
+                <option value="2">Blando</option>
             </select><br>
            
             
