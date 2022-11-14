@@ -42,7 +42,7 @@
          <%
             //conectando a base de datos
             Connection conexion=null;
-            String url="jdbc:mysql://localhost:3306/biblioteca";//url de MySQL
+            String url="jdbc:mysql://localhost:3306/final_progra";//url de MySQL
             String usuario="root";// usuario de mysql local
             String clave="root"; 
            
@@ -57,7 +57,7 @@
              
              int id=Integer.parseInt(request.getParameter("id")); 
              
-             ps=conexion.prepareStatement("select * from libro where codigo="+id);
+             ps=conexion.prepareStatement("select * from libro where codigo_libro="+id);
              rs=ps.executeQuery();
              
              
@@ -77,29 +77,30 @@
                <h1>Modificar alumno</h1>
             <div class="form-group">
                 <label for="exampleInputName">Codigo</label>
-                <input class="form-control" type="text" readonly="" value="<%= rs.getInt("codigo")%>"> 
+                <input class="form-control" type="text" readonly="" value="<%= rs.getInt("codigo_libro")%>"> 
                 <input type="hidden" name="control" value="GUARDAR">
             </div>
             <div class="form-group">
-                <label for="exampleInputName">Nombre </label>
-                <input class="form-control" type="text" placeholder="Ingrese nombre" name="nombre_libro"  value="<%= rs.getString("nombre_libro")%>">
+                <label for="exampleInputName">Nombre del libro</label>
+                <input class="form-control" type="text" placeholder="Ingrese nombre" name="nombre"  value="<%= rs.getString("nombre")%>">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Pasta</label>
-              <input class="form-control" type="text" placeholder="Ingrese correo" name="tipo_de_pasta"  value="<%= rs.getString("tipo_de_pasta")%>">
+              <label for="exampleInputEmail1">Fecha lanzamiento</label>
+              <input class="form-control" type="text" placeholder="Ingrese correo" name="fecha_lanzamiento"  value="<%= rs.getString("fecha_lanzamiento")%>">
          
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Editorial</label>
-              <input type="text" class="form-control"  name="editorial" id="direccion" value="<%= rs.getString("editorial")%>"  >
+              <label for="exampleInputPassword1">Autor</label>
+              <input type="text" class="form-control"  name="autor" id="autor" value="<%= rs.getString("autor")%>"  >
             </div>
                
-                <div class="form-group">
-              <label for="exampleInputPassword1">Año</label>
-              <input class="form-control" type="text" placeholder="Ingrese telefono" name="anio_publicacion"  value="<%= rs.getInt("anio_publicacion")%>">
-            </div>
+               
             
-            <br>
+            <select class="form-control" name="tipo_pasta_id" value="<%= rs.getInt("tipo_pasta_id")%>">
+              
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+            </select><br>
             
             <div>
                 <input type="submit" value="Guardar" class="btn btn-primary "/>             
@@ -113,18 +114,18 @@
     </body>
 </html>
 <%
-        String nombre_libro, tipo_de_pasta, editorial, anio_publicacion;
+        String nombre, fecha_lanzamiento, autor, tipo_pasta_id;
         
        
-        nombre_libro=request.getParameter("nombre_libro");
+        nombre=request.getParameter("nombre");
        
-        tipo_de_pasta=request.getParameter("tipo_de_pasta");
-        editorial=request.getParameter("editorial");      
-        anio_publicacion=request.getParameter("anio_publicacion");
+   fecha_lanzamiento=request.getParameter("fecha_lanzamiento");
+        autor=request.getParameter("autor");      
         
-        if(nombre_libro!=null)
+        tipo_pasta_id=request.getParameter("tipo_pasta_id");
+        if(nombre!=null)
         {
-        ps=conexion.prepareStatement("update libro set nombre_libro='"+nombre_libro+"',tipo_de_pasta='"+tipo_de_pasta+"',editorial='"+editorial+"',anio_publicacion='"+anio_publicacion+"' where codigo="+id);
+        ps=conexion.prepareStatement("update libro set nombre='"+nombre+"',fecha_lanzamiento='"+fecha_lanzamiento+"',autor='"+autor+"',tipo_pasta_id='"+tipo_pasta_id+"' where codigo_libro="+id);
         
         ps.executeUpdate();
         response.sendRedirect("home.jsp");
