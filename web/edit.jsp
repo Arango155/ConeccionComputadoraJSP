@@ -57,7 +57,7 @@
              
              int id=Integer.parseInt(request.getParameter("id")); 
              
-             ps=conexion.prepareStatement("select * from libro where codigo_libro="+id);
+             ps=conexion.prepareStatement("select * from computadora where marca_codigo="+id);
              rs=ps.executeQuery();
              
              

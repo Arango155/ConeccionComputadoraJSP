@@ -1,8 +1,4 @@
-<%-- 
-    Document   : delete
-    Created on : Nov 10, 2022, 6:50:19 PM
-    Author     : jdara
---%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -37,7 +33,7 @@
              
              int id=Integer.parseInt(request.getParameter("id")); 
              
-             ps=conexion.prepareStatement("delete  from libro where codigo_libro="+id);
+             ps=conexion.prepareStatement("delete  from computadora where marca_codigo="+id);
              ps.executeUpdate();
              response.sendRedirect("home.jsp");
              

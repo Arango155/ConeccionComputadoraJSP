@@ -1,0 +1,26 @@
+
+
+*{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   list-style-type: none;
+   text-decoration: none;
+   font-family: 'Poppins', sans-serif;
+   
+
+}
+
+
+.form-register {
+width: 400px;
+background: #ffffff;
+padding: 30px;
+margin: auto;
+margin-top: 17px;
+border-radius: 4px;
+
+}
+
+
+

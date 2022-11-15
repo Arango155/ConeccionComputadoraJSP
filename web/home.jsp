@@ -27,7 +27,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="script.js" type="text/javascript"></script>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link href="estilo.css" rel="stylesheet" type="text/css"/>
        
               
           </head>
@@ -41,51 +41,56 @@
     <body>
         
         
-
-    
-              
- 
-              
                    
                       <%
                               ConexionBaseDeDatos conn = new ConexionBaseDeDatos();
                               Statement smt;
                               ResultSet rs;
                               smt = conn.conectar().createStatement();
-                              rs = smt.executeQuery("SELECT * FROM final_progra.libro");
+                              rs = smt.executeQuery("SELECT * FROM final_progra.computadora");
                     %>
               
               
  
-                    <div  >
-   <form class="form-register"   method="POST"  id="form" name="form"  >
+                   
+                                            
+   <div class="d-flex justify-content-around">
+        <div class="p-3 bd-highlight">
+       
+        <br>
+        <form class="form-register"   method="POST"  id="form" name="form"  >
               
-        <h1>Registro de Libros</h1>
+        <h1>Formulario</h1>
         <br>
         
             <div class="form-group">
-                <label for="exampleInputName">Codigo</label>
-                <input class="form-control" type="text"  name="codigo_libro"  >
+                <label for="exampleInputName">Numero de Modelo</label>
+                <input class="form-control" type="text"  name="modelo"  >
             </div>
             <div class="form-group">
-                <label for="exampleInputName">Nombre </label>
-                <input class="form-control" type="text"  name="nombre"  >
+                <label for="exampleInputName">Tamaño pantalla</label>
+                <input class="form-control" type="text"  name="tamanio_pantalla"  >
             </div>
         
         <div class="form-group">
-                <label for="exampleInputName">Fecha</label>
-                <input class="form-control" type="text"  name="fecha_lanzamiento"  >
+                <label for="exampleInputName">Cantidad Ram</label>
+                <input class="form-control" type="text"  name="cantidad_ram"  >
             </div>
         
          <div class="form-group">
-                <label for="exampleInputName">Autor</label>
-                <input class="form-control" type="text"  name="autor"  >
+                <label for="exampleInputName">Almacenamiento</label>
+                <input class="form-control" type="text"  name="almacenamiento"  >
+            </div>
+        
+        <div class="form-group">
+                <label for="exampleInputName">Sistema operativo</label>
+                <input class="form-control" type="text"  name="sistema_operativo"  >
             </div>
         
           
-          <select class="form-control" name="tipo_pasta_id">
-                <option value="1">Duro</option>
-                <option value="2">Blando</option>
+          <select class="form-control" name="marca_codigo">
+                <option value="1">MARCA 1</option>
+                <option value="2">MARCA 2</option>
             </select><br>
            
             
@@ -99,7 +104,7 @@
             
           <form class="d-flex" role="search">
              
-              <button type="submit" onclick="enviarFormularioOpcionLibro()" class="btn btn-info">Enviar formulario</button>
+              <button type="submit" onclick="enviarFormularioJS()" class="btn btn-primary">Enviar formulario</button>
               <br>
                <br>
               
@@ -107,31 +112,21 @@
                 
           
           </form> 
-                                        
-                
-
-      
-        
-                    
-                     
-                    
-                    
-                     <div class="container mx-auto">
-                              <div class="container my-5">
-                                        <center><h1 class="">Tabla libro</h1></center>
-                              </div>
-                              <div class="d-flex justify-content-between mx-5 my-4">
-                                        <form class="d-flex" role="search">
-                                       <input  class="btn btn-success" type="submit" value="Mostrar todos los cursos">
-                                        </form>
-                                       
-                                       <form class="d-flex" role="search">
+                        
+        </div>
+       <div>
+        <c:if test="${error ==1}">
+                                        <div class="alert alert-danger" id="error">${message}</div>
+                              </c:if>
+                              <div class="table-responsive mx-4 my-4">
+                                  
+                                                                         <form class="d-flex" role="search">
                                                   <input class="form-control me-2" type="text" name="txtSearch">
                                                   <input class="btn btn-warning" type="submit" value="Buscar">
 
                                         </form>
                                   
-                                  
+                              
                                   
                                                             
                                   
@@ -139,19 +134,12 @@
                                                   String nameSearch = request.getParameter("txtSearch");
                                                   if (nameSearch != null) {
                                                             smt = conn.conectar().createStatement();
-                                                            rs = smt.executeQuery("SELECT * FROM final_progra.libro WHERE nombre LIKE" + " '%" + nameSearch + "%' ");
+                                                            rs = smt.executeQuery("SELECT * FROM final_progra.computadora WHERE modelo LIKE" + " '%" + nameSearch + "%' ");
                                                   } else {
                                                             System.err.print("Error");
                                                   }
                                         %>
                               </div>
-                              
-                             
-                                        
-                              <c:if test="${error ==1}">
-                                        <div class="alert alert-danger" id="error">${message}</div>
-                              </c:if>
-                              <div class="table-responsive mx-4 my-4">
                                         <table class="table table-hover table-dark">
                                             <thead>
                                                   <tr>
@@ -159,6 +147,7 @@
                                                             <th scope="col">Nombre</th>
                                                             <th scope="col">Fecha</th>
                                                             <th scope="col">Autor</th>
+                                                            <th scope="col">Pasta</th>
                                                             <th scope="col">Pasta</th>
                                                             
                                                             <th scope="col">Acciones</th>
@@ -168,16 +157,17 @@
                                                             while (rs.next()) {
                                                   %>
                                                   <tr>
-                                                            <td><%= rs.getString("codigo_libro")%></td>
-                                                            <td><%= rs.getString("nombre")%></td>
-                                                            <td><%= rs.getString("fecha_lanzamiento")%></td>
-                                                            <td><%= rs.getString("autor")%></td>
-                                                            <td><%= rs.getString("tipo_pasta_id")%></td>
-                                                            
-                                                           
+                                                            <td><%= rs.getString("modelo")%></td>
+                                                            <td><%= rs.getString("tamaño_pantalla")%></td>
+                                                            <td><%= rs.getString("cantidad_ram")%></td>
+                                                            <td><%= rs.getString("almacenamiento")%></td>
+                                                            <td><%= rs.getString("sistema_operativo")%></td>
+                                                             <td><%= rs.getString("marca_codigo")%></td>
+
                                                             <td>
-                                                                      <a href="edit.jsp?id=<%= rs.getInt("codigo_libro")%>" class="btn btn-outline-light">Editar</a>
-                                                                      <a href="delete.jsp?id=<%= rs.getInt("codigo_libro")%>" class="btn btn-danger">Eliminar</a>
+                                                                    
+                                                                       <a href="edit.jsp?id=<%= rs.getInt("marca_codigo")%>" class="btn btn-outline-light">Editar</a>
+                                                                      <a href="delete.jsp?id=<%= rs.getInt("marca_codigo")%>" class="btn btn-danger">Eliminar</a>
                                                                       
                                                                    
                                                                       
@@ -193,8 +183,7 @@
                                         </table>
                               </div>
                     </div>
-                                  
-                                                 
-          </body>
-          </div>
+        </div>
+                                             </div>      
+                                            
 </html>

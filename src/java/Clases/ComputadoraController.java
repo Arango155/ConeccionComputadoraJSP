@@ -6,27 +6,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-public class LibroController {
-      Libro[] tablaLibro;
+/**
+ *
+ * @author JP
+ */
+public class ComputadoraController {
+      Computadora[] tablaLibro;
     int indiceArray;
     private ConexionBaseDeDatos conectorBD;
     private Connection conexion;
     private PreparedStatement statement = null;
     private ResultSet result = null;
     
-    public LibroController(){
-        this.tablaLibro = new Libro[100];
+    public ComputadoraController(){
+        this.tablaLibro = new Computadora[100];
         this.indiceArray=0;
     }
     
-     public void guardarLibro(Libro alumno){
-        this.tablaLibro[this.indiceArray]=alumno;  
+     public void guardarComputadora(Computadora object){
+        this.tablaLibro[this.indiceArray]=object;  
         this.indiceArray=this.indiceArray+1;
         // procedimiento para almacenar en la Base de Datos
     }
     
-    public Libro[] getLibro(){
+    public Computadora[] getComputadora(){
         return this.tablaLibro;
     }
     
@@ -35,17 +38,18 @@ public class LibroController {
         conexion=conectorBD.conectar();
     }
     
-    public boolean getLibro2(Libro libro){        
-        String sql = "INSERT INTO final_progra.libro(codigo_libro, nombre, fecha_lanzamiento, autor, tipo_pasta_id) ";
-             sql += " VALUES( ?,?,?,?,?)"; 
+    public boolean getComputadora2(Computadora computadora){        
+        String sql = "INSERT INTO final_progra.computadora(modelo,tamaño_pantalla,cantidad_ram,almacenamiento,sistema_operativo,marca_codigo) ";
+             sql += " VALUES( ?,?,?,?,?,?)"; 
         try{
             abrirConexion();
             statement = conexion.prepareStatement(sql); 
-            statement.setInt(1, libro.getCodigo_libro());
-            statement.setString(2, libro.getNombre());
-            statement.setString(3, libro.getFecha_lanzamiento());
-            statement.setString(4, libro.getAutor());
-            statement.setString(5, libro.getTipo_pasta_id());
+            statement.setString(1, computadora.getModelo());
+            statement.setString(2, computadora.getTamaño_pantalla());
+            statement.setString(3, computadora.getCantidad_ram());
+            statement.setString(4, computadora.getAlmacenamiento());
+            statement.setString(5, computadora.getSistema_operativo());
+            statement.setInt(6,computadora.getMarca_codigo());
              int resultado = statement.executeUpdate(); 
                 if(resultado > 0){
                     return true;

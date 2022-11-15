@@ -2,7 +2,6 @@ package Clases;
 
 
 
-import Login.*;
 import Clases.ConexionBaseDeDatos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

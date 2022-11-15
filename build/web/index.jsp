@@ -1,7 +1,3 @@
-<%-- 
-    
-    Author     : Arango
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +11,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="script.js" type="text/javascript"></script>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link href="estilo.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>        
             <br>
@@ -24,26 +20,25 @@
                     <div class="alert alert-danger" id="error">${mensaje}</div>
                    
                 </c:if>
-               <div class="abs-center">
+               
                 
                 <form class="form-register" action="NewServlet" method="POST">
-                <h1>Bienvenido</h1>
+                <h1>Formulario</h1>
                 <br>
                 
             <div class="form-group">
-              <label for="exampleInputEmail1" >Ingrese usuario</label>
-              <input type="text" class="controls1" name="user"  aria-describedby="emailHelp">
+              <label for="exampleInputEmail1" >Ingrese su usuario</label>
+              <input  class="form-control"  type="text" name="user"  aria-describedby="emailHelp">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Ingrese su contraseña</label>
-              <input type="password" class="controls1" name="pass"  >
+              <input  class="form-control"  type="password"  name="pass"  >
             </div>
             
-                 <button type="submit" value="Login" class="botons">Iniciar Sesion</button>
+                 <button type="submit" value="Login" class="btn-primary">Iniciar Sesion</button>
              
           </form>
-                   
-               </div> </div>
+              </div>
             
         
                    

@@ -1,6 +1,4 @@
 
-
-
 function enviarFormularioOpcionLog(){
 	const XHR = new XMLHttpRequest();
 	  var formData = new URLSearchParams(new FormData(document.getElementById('form'))).toString();
@@ -27,7 +25,7 @@ function enviarFormularioOpcionLog(){
           XHR.send(formData);         
 }
 
-function enviarFormularioOpcionLibro(){
+function enviarFormularioJS(){
 	const XHR = new XMLHttpRequest();
 	  var formData = new URLSearchParams(new FormData(document.getElementById('form'))).toString();
          
@@ -37,7 +35,7 @@ function enviarFormularioOpcionLibro(){
 	  });
 
 	  // Set up our request
-	  XHR.open('POST', 'NewServletLibro', true);
+	  XHR.open('POST', 'ServletComputadora', true);
           XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
           
           XHR.onload = () => {
