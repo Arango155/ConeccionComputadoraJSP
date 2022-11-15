@@ -1,7 +1,13 @@
+package Clases;
 
-import Clases.Log;
-import Clases.LogController;
-import Clases.ConexionBaseDeDatos;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import Login.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,22 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = {"/NewServletLog"})
-public class NewServletLog extends HttpServlet {
-    Log log;
-    LogController registroLog;
-     Log[] LogRegistrado;
+/**
+ *
+ * @author JP
+ */
+@WebServlet(urlPatterns = {"/NewServlet"})
+public class NewServlet extends HttpServlet {
+    User usuario;
 
-    
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,27 +37,26 @@ public class NewServletLog extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter respuesta = response.getWriter()) {            
-            log=new Log(
-                request.getParameter("nombre_usuario"),
-                request.getParameter("contrasenia")
-                
-            );               
-                        
-            if(registroLog==null){
-                 registroLog=new LogController();
+        try (PrintWriter out = response.getWriter()) {
+            usuario = new User();
+            String user = request.getParameter("user");
+            String pass = request.getParameter("pass");
+            if(user.equals("")||pass.equals("")){
+                request.setAttribute("success", 0);
+                request.setAttribute("mensaje", "Campo usuario y contraseña son requeridos");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
-           
-            registroLog.guardarLog(log);//almacenarlo en el array
             
-           if(registroLog.getLog2(log)){//almacenarlo en BD
-               respuesta.println(1);
-           }else{
-               respuesta.println(0);
-           }
-            LogRegistrado= registroLog.getLog();           
-           
-
+            String usuarioConsultado= usuario.validarUsuario(request.getParameter("user"), request.getParameter("pass"));
+            if(usuarioConsultado.equals(request.getParameter("user"))){
+               request.getSession().setAttribute("user", request.getParameter("user"));
+                request.getSession().setAttribute("pass", request.getParameter("pass"));
+                response.sendRedirect(request.getContextPath()+"/PasswordController");              
+            }else{
+                request.setAttribute("success", 0);
+                request.setAttribute("mensaje", "Usuario y/o contraseña no encontrado");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }            
         }
     }
 

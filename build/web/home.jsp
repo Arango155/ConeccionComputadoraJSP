@@ -42,28 +42,9 @@
         
         
 
-          
-          <body>
+    
               
-             
-              <header>
-         
-
-   
-
-<div class="user-wrapper">
-    <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" width="60px" height="60px" alt="">
-<div><h4>${UsuarioLogueado}</h4>
-<small>Admin</small></div>
-</div>            
-                  
-                  <div>
-                      <a href="Logout" class="btn btn-danger">Cerrar sesion</a>
-                  </div>
-                  
-    </header>
-              
-              
+ 
               
                    
                       <%
@@ -74,106 +55,8 @@
                               rs = smt.executeQuery("SELECT * FROM final_progra.libro");
                     %>
               
-                    
-                    <div class="sidebar">
-            <div class="logo-details">
-              <i class='bx bxl-c-plus-plus icon'></i>
-                
-                <i class='bx bx-menu' id="btn" ></i>
-            </div>
-            
-                
-              <li>
-               
-                    <a href="home.jsp">
-                        
-                  <i class='bx bx-grid-alt'></i>
-                  <span class="links_name">Alumno</span>
-                </a>
-                 <span class="tooltip">Alumno</span>
-              </li>
-              <li>
-               
-                  <a href="home2.jsp">
-                 <i class='bx bx-user' ></i>
-                 
-                 <span class="links_name">Curso</span>
-               </a>
-               <span class="tooltip">Curso</span>
-             </li>
-             <li>
-               <a href="#">
-                 <i class='bx bx-chat' ></i>
-                 <span class="links_name">Messages</span>
-               </a>
-               <span class="tooltip">Messages</span>
-             </li>
-             <li>
-                 <a href="Vistas/Collaborator.jsp">
-                 <i class='bx bx-pie-chart-alt-2' ></i>
-                 <span class="links_name">Collaborator</span>
-               </a>
-               <span class="tooltip">Collaborator</span>
-             </li>
-             <li>
-                 <a href="Vistas/Projects.jsp">
-                 <i  class='bx bx-folder' ></i>
-                 <span class="links_name">Project Manager</span>
-               </a>
-               
-               <span class="tooltip">Projects</span>
-             </li>
-             
-              <li>
-               <a href="#">
-                 <i class='bx bx-cart-alt' ></i>
-                 <span class="links_name">Order</span>
-               </a>
-               <span class="tooltip">Order</span>
-             </li>
-             <li>
-               <a href="#">
-                 <i class='bx bx-heart' ></i>
-                 <span class="links_name">Saved</span>
-               </a>
-               <span class="tooltip">Saved</span>
-             </li>
-             <li>
-               <a href="#">
-                 <i class='bx bx-cog' ></i>
-                 <span class="links_name">Setting</span>
-               </a>
-               <span class="tooltip">Setting</span>
-             </li>
-             
-             <li class="profile">
-                 <div class="profile-details">
-                   <!--<img src="profile.jpg" alt="profileImg">-->
-                   
-                 </div>
-                 <a href="Logout">Logout - ${UsuarioLogueado}<!------------ CERRAR SESION ------------>
-                    <i  class='bx bx-log-out' id="log_out" ></i>
-                   
-                </a>
-                 
-             </li>
-
-                  </div>    
-
               
-          
-               
-          
-            
-
-             
-             
-            
-                    
-                    <br><!-- comment -->
-                    <br>
-                    <br>
-                    <br>
+ 
                     <div  >
    <form class="form-register"   method="POST"  id="form" name="form"  >
               
@@ -217,13 +100,18 @@
           <form class="d-flex" role="search">
              
               <button type="submit" onclick="enviarFormularioOpcionLibro()" class="btn btn-info">Enviar formulario</button>
-                                       </form> 
+              <br>
+               <br>
+              
+                      <a href="Logout" class="btn btn-danger">Cerrar sesion</a>
+                
+          
+          </form> 
                                         
                 
 
-            
-        </form>   
-        </div>
+      
+        
                     
                      
                     
@@ -308,5 +196,5 @@
                                   
                                                  
           </body>
-          
+          </div>
 </html>

@@ -1,5 +1,9 @@
-package Login;
+package Clases;
 
+
+
+
+import Login.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -9,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = {"/PasswordController"})
-public class PasswordController extends HttpServlet {
+@WebServlet(urlPatterns = {"/Logout"})
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -25,15 +29,10 @@ public class PasswordController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           if(request.getSession().getAttribute("user")==null){
-               //response.sendRedirect(request.getContextPath()+"/index.jsp");
-               request.setAttribute("success", 0);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-           }else{
-               request.setAttribute("UsuarioLogueado", request.getSession().getAttribute("user"));
-               request.getRequestDispatcher("home.jsp").forward(request, response);
-           }
-           
+            request.getSession().removeAttribute("user");
+            request.getSession().removeAttribute("pass");
+            request.getSession().invalidate();
+            response.sendRedirect(request.getContextPath()+"/index.jsp");
         }
     }
 

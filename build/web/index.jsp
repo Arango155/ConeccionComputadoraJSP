@@ -40,8 +40,7 @@
             </div>
             
                  <button type="submit" value="Login" class="botons">Iniciar Sesion</button>
-                 
-                 <a href="index2.jsp">Registrate aqui</a>
+             
           </form>
                    
                </div> </div>

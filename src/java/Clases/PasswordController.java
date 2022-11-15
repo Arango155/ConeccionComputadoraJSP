@@ -1,12 +1,6 @@
-package Login;
+package Clases;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+import Login.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,13 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-/**
- *
- * @author JP
- */
-@WebServlet(urlPatterns = {"/NewServlet"})
-public class NewServlet extends HttpServlet {
-    User usuario;
+@WebServlet(urlPatterns = {"/PasswordController"})
+public class PasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,25 +26,15 @@ public class NewServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            usuario = new User();
-            String user = request.getParameter("user");
-            String pass = request.getParameter("pass");
-            if(user.equals("")||pass.equals("")){
-                request.setAttribute("success", 0);
-                request.setAttribute("mensaje", "Campo usuario y contraseña son requeridos");
+           if(request.getSession().getAttribute("user")==null){
+               //response.sendRedirect(request.getContextPath()+"/index.jsp");
+               request.setAttribute("success", 0);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
-            }
-            
-            String usuarioConsultado= usuario.validarUsuario(request.getParameter("user"), request.getParameter("pass"));
-            if(usuarioConsultado.equals(request.getParameter("user"))){
-               request.getSession().setAttribute("user", request.getParameter("user"));
-                request.getSession().setAttribute("pass", request.getParameter("pass"));
-                response.sendRedirect(request.getContextPath()+"/PasswordController");              
-            }else{
-                request.setAttribute("success", 0);
-                request.setAttribute("mensaje", "Usuario y/o contraseña no encontrado");
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-            }            
+           }else{
+               request.setAttribute("UsuarioLogueado", request.getSession().getAttribute("user"));
+               request.getRequestDispatcher("home.jsp").forward(request, response);
+           }
+           
         }
     }
 
