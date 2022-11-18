@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Alumno</title>
+        <title>Editar </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -74,32 +74,37 @@
             
             <div  >
    <form class="form-register"   method="POST"  id="form" name="form"  >
-               <h1>Modificar alumno</h1>
+               <h1>Modificar registro</h1>
             <div class="form-group">
-                <label for="exampleInputName">Codigo</label>
-                <input class="form-control" type="text" readonly="" value="<%= rs.getInt("codigo_libro")%>"> 
+                <label for="exampleInputName">Modelo</label>
+                <input class="form-control" type="text"  name="modelo" readonly="" value="<%= rs.getString("modelo")%>"> 
                 <input type="hidden" name="control" value="GUARDAR">
             </div>
             <div class="form-group">
-                <label for="exampleInputName">Nombre del libro</label>
-                <input class="form-control" type="text" placeholder="Ingrese nombre" name="nombre"  value="<%= rs.getString("nombre")%>">
+                <label for="exampleInputName">Tamaño pantalla</label>
+                <input class="form-control" type="text"  name="tamaño_pantalla"  value="<%= rs.getString("tamaño_pantalla")%>">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Fecha lanzamiento</label>
-              <input class="form-control" type="text" placeholder="Ingrese correo" name="fecha_lanzamiento"  value="<%= rs.getString("fecha_lanzamiento")%>">
+              <label for="exampleInputEmail1">Cantidad ram</label>
+              <input class="form-control" type="text"  name="cantidad_ram"  value="<%= rs.getString("cantidad_ram")%>">
          
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Autor</label>
-              <input type="text" class="form-control"  name="autor" id="autor" value="<%= rs.getString("autor")%>"  >
+              <label for="exampleInputPassword1">Almacenamiento</label>
+              <input type="text" class="form-control"  name="almacenamiento"  value="<%= rs.getString("almacenamiento")%>"  >
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleInputPassword1">Sistema operativo</label>
+              <input type="text" class="form-control"  name="sistema_operativo"  value="<%= rs.getString("sistema_operativo")%>"  >
             </div>
                
                
             
-            <select class="form-control" name="tipo_pasta_id" value="<%= rs.getInt("tipo_pasta_id")%>">
+            <select class="form-control" name="marca_codigo" value="<%= rs.getInt("marca_codigo")%>">
               
-                <option value="1">Duro</option>
-                <option value="2">Blando</option>
+                <option value="1">MARCA 1</option>
+                <option value="2">MARCA 2</option>
             </select><br>
             
             <div>
@@ -114,18 +119,19 @@
     </body>
 </html>
 <%
-        String nombre, fecha_lanzamiento, autor, tipo_pasta_id;
+        String tamaño_pantalla,cantidad_ram,almacenamiento,sistema_operativo,marca_codigo;
         
        
-        nombre=request.getParameter("nombre");
+        tamaño_pantalla=request.getParameter("tamaño_pantalla");
        
-   fecha_lanzamiento=request.getParameter("fecha_lanzamiento");
-        autor=request.getParameter("autor");      
+  cantidad_ram=request.getParameter("cantidad_ram");
+        almacenamiento=request.getParameter("almacenamiento");      
         
-        tipo_pasta_id=request.getParameter("tipo_pasta_id");
-        if(nombre!=null)
+        sistema_operativo=request.getParameter("sistema_operativo");
+        marca_codigo=request.getParameter("marca_codigo");
+        if(tamaño_pantalla!=null)
         {
-        ps=conexion.prepareStatement("update libro set nombre='"+nombre+"',fecha_lanzamiento='"+fecha_lanzamiento+"',autor='"+autor+"',tipo_pasta_id='"+tipo_pasta_id+"' where codigo_libro="+id);
+        ps=conexion.prepareStatement("update computadora set tamaño_pantalla='"+tamaño_pantalla"',cantidad_ram='"+cantidad_ram+"',almacenamiento='"+almacenamiento+"',sistema_operativo='"+sistema_operativo+"',sistema_operativo='"+sistema_operativo+"',marca_codigo='"+marca_codigo+"' where modelo="+id);
         
         ps.executeUpdate();
         response.sendRedirect("home.jsp");

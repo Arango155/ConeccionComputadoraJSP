@@ -23,7 +23,7 @@ public class ServletComputadora extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter respuesta = response.getWriter()) {            
             computadora=new Computadora(
-                request.getParameter("modelo"),
+               request.getParameter("modelo"),
                 request.getParameter("tamanio_pantalla"),
                 request.getParameter("cantidad_ram"),
                 request.getParameter("almacenamiento"),

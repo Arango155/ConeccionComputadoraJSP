@@ -42,14 +42,15 @@
         
         
                    
-                      <%
+                           <%
                               ConexionBaseDeDatos conn = new ConexionBaseDeDatos();
                               Statement smt;
                               ResultSet rs;
                               smt = conn.conectar().createStatement();
-                              rs = smt.executeQuery("SELECT * FROM final_progra.computadora");
+                              rs = smt.executeQuery("SELECT * FROM computadora "
+                                      + "INNER JOIN marca "
+                                      + "ON computadora.marca_codigo = marca.codigo");
                     %>
-              
               
  
                    
@@ -122,7 +123,7 @@
                                   
                                                                          <form class="d-flex" role="search">
                                                   <input class="form-control me-2" type="text" name="txtSearch">
-                                                  <input class="btn btn-warning" type="submit" value="Buscar">
+                                                  <input class="btn btn-primary" type="submit" value="Buscar">
 
                                         </form>
                                   
@@ -162,14 +163,15 @@
                                                             <td><%= rs.getString("cantidad_ram")%></td>
                                                             <td><%= rs.getString("almacenamiento")%></td>
                                                             <td><%= rs.getString("sistema_operativo")%></td>
-                                                             <td><%= rs.getString("marca_codigo")%></td>
+                                                             <td><%= rs.getString("descripción")%></td>
 
                                                             <td>
+                                                                
+                                                                  
+                                                                      <a href="delete.jsp?id=<%= rs.getString("modelo")%>" class="btn btn-warning" >Eliminar</a>
+                                                                      <a href="edit.jsp?id=<%= rs.getString("modelo")%>" class="btn btn-danger">Editar</a>
+                                                        
                                                                     
-                                                                       <a href="edit.jsp?id=<%= rs.getInt("marca_codigo")%>" class="btn btn-outline-light">Editar</a>
-                                                                      <a href="delete.jsp?id=<%= rs.getInt("marca_codigo")%>" class="btn btn-danger">Eliminar</a>
-                                                                      
-                                                                   
                                                                       
                                                                       
                                                             </td>
